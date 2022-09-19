@@ -120,6 +120,6 @@ posts$! : Observable<Post[]>;
 
 
 # terminologies
-** : wildcard
-<> : les chevrons
-`  :back qote 
+## ** : wildcard
+## <> : les chevrons
+## `  :back qote 
