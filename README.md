@@ -59,6 +59,66 @@ Pour utiliser un component Material, il faut importer le module correspondant.
 
 Exporter des éléments depuis un module les met à disposition de tout autre module qui viendrait l'importer – par exemple, exporter MatToolbarModule dans SharedModule.
 
+
+
+# etape pour l'implementation d'un resolver 
+
+## service
+preparer une methode du service qui renvoi un observable
+```TypeScript
+  getPosts(): Observable<Post[]> {
+      return this.http.get<Post[]>(`${environment.apiUrl}/posts`);
+  }
+```
+
+## resolver
+Implementer le resolver comme ceci
+- considerer comme un service qui utiliser le service precedemment preparer
+- dans notre cas nous n'utiliserons pas les deux parametre de la methode resolve
+```TypeScript
+@Injectable()
+export class PostsResolver implements Resolve<Post[]> {
+    constructor(private postService: PostService){}
+    resolve( route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Post[]>
+    {
+        return this.postService.getPosts();
+    }
+}
+```
+
+## Container (PostListComponent)
+```TypeScript
+posts$! : Observable<Post[]>;
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.posts$ =  this.route.data.pipe(
+      map(data => data['posts'])
+    );
+    
+  }
+```
+<h2>Posts</h2>
+<app-post-list-item *ngFor="let post of posts$ | async" [post]="post">
+</app-post-list-item>
+```Html
+
+```
+## presenter (PostListItemComponent)
+
+```TypeScript
+  @Input() post!: Post;
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+```
+```HTML
+<p>{{post.title }}</p>
+```
+
+
 # terminologies
 ** : wildcard
 <> : les chevrons
