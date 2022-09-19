@@ -99,11 +99,11 @@ posts$! : Observable<Post[]>;
     
   }
 ```
+
+```Html
 <h2>Posts</h2>
 <app-post-list-item *ngFor="let post of posts$ | async" [post]="post">
 </app-post-list-item>
-```Html
-
 ```
 ## presenter (PostListItemComponent)
 
@@ -114,6 +114,7 @@ posts$! : Observable<Post[]>;
   ngOnInit(): void {
   }
 ```
+
 ```HTML
 <p>{{post.title }}</p>
 ```
