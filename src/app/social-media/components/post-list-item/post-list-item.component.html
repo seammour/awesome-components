@@ -10,7 +10,7 @@
     <mat-card-content>
         <img mat-card-image *ngIf="post.imageUrl as imageUrl" [src]="imageUrl" [alt]="post.title" >
         <span class="post-content">
-            {{post.content | shorten}}
+            {{post.content | shorten : 300}}
         </span>
     </mat-card-content>
 
