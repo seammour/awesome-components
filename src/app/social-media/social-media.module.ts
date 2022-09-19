@@ -14,7 +14,8 @@ import { PostListItemComponent } from './components/post-list-item/post-list-ite
   declarations: [PostListComponent, PostListItemComponent],
   imports: [
     CommonModule,
-    SocialMediaRoutingModule
+    SocialMediaRoutingModule,
+    SharedModule
   ],
   providers:[
     PostService,
